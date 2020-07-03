@@ -1,0 +1,149 @@
+﻿<Window x:Class="Project_SWEI_Rahmani_Obaidullah.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project_SWEI_Rahmani_Obaidullah"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <DockPanel DataContext="{Binding PVM}" >
+        <Menu DockPanel.Dock="Top" Height="20">
+
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch"></DockPanel>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+
+            <!--Click="AddNewImage_Click"-->
+            <MenuItem Header="Add Images" />
+
+            <MenuItem Header="PDF">
+                <!--Click="StandalonePDF_Click"-->
+                <MenuItem Header="_Standalone"/>
+                <!--Click="TagSummaryPDF_Click"-->
+                <MenuItem Header="_TagSummary"/>
+            </MenuItem>
+
+            <MenuItem Header="_Photograpgers">
+                <!--Click="PhotographersList_Click""-->
+                <MenuItem Header="_List" />
+                <!--Click="Click="AddNewPhotographer_Click""-->
+                <MenuItem Header="_Add" />
+                <!--Click="TagSummaryPDF_Click"-->
+                <MenuItem Header="_Assign" />
+            </MenuItem>
+
+            <MenuItem Header="Help" HorizontalAlignment="Right">
+                <MenuItem Header="About"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <TextBlock 
+            DockPanel.Dock="Top" Text="{Binding searcbString, UpdateSourceTrigger=PropertyChanged}" 
+            Margin="5" Padding="5, 3" TextWrapping="Wrap" Height="25" Background="#FFF3FFF0"/>
+
+        <Grid DockPanel.Dock="Top" Height="Auto" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300*"/>
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            <!--DockPanel.Dock = "Top" -->
+            <Grid Grid.Column="1" DockPanel.Dock = "Top" Height="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding SelectImageSource, Mode=TwoWay}"/>
+                <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="5"/>
+                <TabControl x:Name="tabControl" Grid.Column="2" SelectedIndex="{Binding selectedTab}">
+                    <TabItem Header="IPTC">
+                        <Grid Background="White" Height="Auto" Width="Auto">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <ComboBox ItemsSource="{Binding iptcList, Mode=TwoWay}" Grid.Row="0" HorizontalAlignment="Stretch" 
+                                  Margin="5,5,5,0" VerticalAlignment="Center"
+                                  Width="Auto" Height="24" IsSynchronizedWithCurrentItem="True" DisplayMemberPath=""
+                                  SelectedItem="{Binding Path=selectedProperty}"/>
+
+                            <TextBox Grid.Row="1" Text="{Binding propValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     IsEnabled="{Binding isProperty}" HorizontalAlignment="Stretch" Margin="5,5,5,0" TextWrapping="Wrap"
+                                     VerticalAlignment="Center" Height="Auto" Width="Auto"/>
+
+                            <TextBox Grid.Row="2" Text="{Binding propComment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     IsEnabled="{Binding isProperty}" HorizontalAlignment="Stretch" Margin="5,5,5,0" TextWrapping="Wrap"
+                                     VerticalAlignment="Stretch" Height="Auto" Width="Auto"/>
+
+                            <!-- Click="Save_Click" -->
+                            <Button Grid.Row="3" Content="Save" HorizontalAlignment="Right" Margin="10,20,5,10"
+                                    Padding="20, 5" IsEnabled="{Binding isProperty}" VerticalAlignment="Center" Width="Auto"
+                                    FontSize="14" />
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="EXIF">
+                        <Grid Background="White" Height="Auto" Width="Auto">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <ComboBox ItemsSource="{Binding exifList, Mode=TwoWay}" Grid.Row="0" HorizontalAlignment="Stretch"
+                                      Margin="5,5,5,0" VerticalAlignment="Center" Width="Auto" Height="24" IsSynchronizedWithCurrentItem="True"
+                                      DisplayMemberPath="" SelectedItem="{Binding Path=selectedProperty}"/>
+
+                            <TextBox Text="{Binding propValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                     IsEnabled="{Binding isProperty}" Grid.Row="1" HorizontalAlignment="Stretch"
+                                     Margin="5,5,5,0" TextWrapping="Wrap" VerticalAlignment="Center" Height="Auto" Width="Auto"/>
+
+                            <TextBox Text="{Binding propComment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     IsEnabled="{Binding isProperty}" Grid.Row="2" HorizontalAlignment="Stretch" Margin="5,5,5,0"
+                                     TextWrapping="Wrap" VerticalAlignment="Stretch" Height="Auto" Width="Auto"/>
+
+                            <!-- Click="Save_Click" -->
+                            <Button Grid.Row="3" Content="Save" HorizontalAlignment="Right" Margin="10,20,5,10"
+                                    Padding="20,5" IsEnabled="{Binding isProperty}" VerticalAlignment="Center"
+                                    Width="Auto" FontSize="14" />
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+            <GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="5">
+                <GridSplitter.Template>
+                    <ControlTemplate TargetType="{x:Type GridSplitter}">
+                        <Grid>
+                       
+                            <Button VerticalAlignment="Stretch" Height="Auto" Background="AliceBlue" BorderBrush="AntiqueWhite">
+                                <!-- Funktioniert nicht ganz -->
+                                <!-- Image Source="images/assets/dots.png" Height="10" Width="10"/ -->
+                            </Button>
+                            
+                            <Rectangle Width="Auto" Height="Auto" Fill="#FFDC7171"/>
+                            
+                        </Grid>
+                        
+                    </ControlTemplate>
+                </GridSplitter.Template>
+            </GridSplitter>
+            <!-- uc ..... anschauen -->
+        </Grid>
+    </DockPanel>
+</Window>
+    
+    
+<!-- facek1ck -->
