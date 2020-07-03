@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_SWEI_Rahmani_Obaidullah.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace Project_SWEI_Rahmani_Obaidullah
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainViewModel mainViewModel; 
+        //Ein Objekt von PhotographerWindowViewModel erstellen
         public MainWindow()
         {
             InitializeComponent();

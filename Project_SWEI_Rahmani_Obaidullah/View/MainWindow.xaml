@@ -127,23 +127,21 @@
                 <GridSplitter.Template>
                     <ControlTemplate TargetType="{x:Type GridSplitter}">
                         <Grid>
-                       
+
                             <Button VerticalAlignment="Stretch" Height="Auto" Background="AliceBlue" BorderBrush="AntiqueWhite">
                                 <!-- Funktioniert nicht ganz -->
                                 <!-- Image Source="images/assets/dots.png" Height="10" Width="10"/ -->
                             </Button>
-                            
+
                             <Rectangle Width="Auto" Height="Auto" Fill="#FFDC7171"/>
-                            
+
                         </Grid>
-                        
+
                     </ControlTemplate>
                 </GridSplitter.Template>
             </GridSplitter>
+            <!-- Anschauen - ist nicht ganz richtig -->
             <!-- uc ..... anschauen -->
         </Grid>
     </DockPanel>
 </Window>
-    
-    
-<!-- facek1ck -->
